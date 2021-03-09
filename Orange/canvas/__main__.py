@@ -388,6 +388,12 @@ def main(argv=None):
     parser.add_option("--no-welcome",
                       action="store_true",
                       help="Don't show welcome dialog.")
+    parser.add_option("-b", "--batch-mode",
+                      action="store_true",
+                      help="Run in batch mode - "
+                      "exit after initial workflow run,"
+                      "print errors and return exit nonzero "
+                      "status if any error occured.")
     parser.add_option("--no-splash",
                       action="store_true",
                       help="Don't show splash screen.")
@@ -571,6 +577,8 @@ def main(argv=None):
     canvas_window.setAttribute(Qt.WA_DeleteOnClose)
     canvas_window.setWindowIcon(config.application_icon())
     canvas_window.connect_output_stream(stream)
+
+    canvas_window.batch_mode = options.batch_mode
 
     # initialize notification server, set to initial canvas
     notif_server = NotificationServer()
